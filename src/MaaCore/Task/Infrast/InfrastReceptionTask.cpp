@@ -42,9 +42,7 @@ bool asst::InfrastReceptionTask::_run()
         back_to_reception_main();
     }
 
-    if (m_send_clue) {
-        send_clue();
-    }
+    send_clue();
 
     if (need_exit()) {
         return false;
@@ -168,7 +166,7 @@ bool asst::InfrastReceptionTask::proc_clue_vacancy()
 
     cv::Mat image = ctrler()->get_image();
 
-    // 优先检测官服新增的“快捷置入”按钮，如果存在则尝试根据数字与空位一致时批量置入
+    // 优先检测官服新增的"快捷置入"按钮，如果存在则尝试根据数字与空位一致时批量置入
     if (ProcessTask(*this, { "InfrastClueQuickInsert" }).set_retry_times(3).run()) {
         InfrastClueVacancyImageAnalyzer vacancy_analyzer(image);
         vacancy_analyzer.set_to_be_analyzed(clue_suffix);
@@ -245,9 +243,8 @@ bool asst::InfrastReceptionTask::back_to_reception_main()
 
 bool asst::InfrastReceptionTask::send_clue()
 {
-    // 优先检测是否存在“快捷传递重复线索”按钮（官服特性），若存在则点击一次
     ProcessTask task(*this, { "SendClues" });
-    return task.set_retry_times(20).run();
+    return task.run();
 }
 
 bool asst::InfrastReceptionTask::shift()

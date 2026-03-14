@@ -3100,7 +3100,7 @@
         "roi": [1160, 320, 80, 90],
         "maskRange": [1, 255],
         "postDelay": 1000,
-        "next": ["InfrastClueQuickSendDuplicates", "SelectClue", "CloseSendClue"]
+        "next": ["SelectClue", "CloseSendClue"]
     },
     "SelectClue": {
         "action": "ClickSelf",
@@ -3108,6 +3108,7 @@
         "method": "RGBCount",
         "colorScales": [[200, 255]],
         "maxTimes": 3,
+        "onErrorNext": ["CloseSendClue"],
         "exceededNext": ["CloseSendClue"],
         "next": ["ClueSelected", "SelectClue"]
     },
@@ -3123,6 +3124,7 @@
         "templThreshold": 0.75,
         "maxTimes": 3,
         "reduceOtherTimes": ["SelectClue*3"],
+        "onErrorNext": ["CloseSendClue"],
         "exceededNext": ["CloseSendClue"],
         "next": [
             "ClueGiveTo1st",
@@ -3143,7 +3145,7 @@
         "template": "SendClueConfirm.png",
         "action": "ClickSelf",
         "roi": [1150, 50, 100, 160],
-        "postDelay": 500,
+        "postDelay": 3500,
         "next": ["ClueGiveTo1stConfirm@LoadingText", "SelectClue", "CloseSendClue"]
     },
     "ClueGiveTo2nd": {
@@ -3156,7 +3158,7 @@
         "template": "SendClueConfirm.png",
         "action": "ClickSelf",
         "roi": [1150, 200, 100, 160],
-        "postDelay": 500,
+        "postDelay": 3500,
         "next": ["ClueGiveTo2ndConfirm@LoadingText", "SelectClue", "CloseSendClue"]
     },
     "ClueGiveTo3rd": {
@@ -3169,7 +3171,7 @@
         "template": "SendClueConfirm.png",
         "action": "ClickSelf",
         "roi": [1150, 350, 100, 160],
-        "postDelay": 500,
+        "postDelay": 3500,
         "next": ["ClueGiveTo3rdConfirm@LoadingText", "SelectClue", "CloseSendClue"]
     },
     "ClueGiveTo4th": {
@@ -3182,13 +3184,13 @@
         "template": "SendClueConfirm.png",
         "action": "ClickSelf",
         "roi": [1150, 500, 100, 160],
-        "postDelay": 500,
+        "postDelay": 3500,
         "next": ["ClueGiveTo4thConfirm@LoadingText", "SelectClue", "CloseSendClue"]
     },
     "CloseSendClue": {
         "action": "ClickSelf",
         "roi": [1225, 16, 41, 41],
-        "preDelay": 2500,
+        "preDelay": 4000,
         "next": ["InfrastClueSelfNew", "InfrastClueFriendNew", "ReceptionFlag", "CloseSendClue"]
     },
     "ClueGiveToNextPage": {
